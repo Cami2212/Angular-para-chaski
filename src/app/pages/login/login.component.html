@@ -1,0 +1,142 @@
+<!--=====================================
+    Breadcrumb
+    ======================================-->
+<div class="ps-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/">Inicio</a></li>
+            <li>Iniciar Sesión </li>
+        </ul>
+    </div>
+</div>
+<!--=====================================
+    Login - Register Content
+    ======================================-->
+<div class="ps-my-account">
+    <div class="container">
+        <form class="ps-form--account ps-tab-root" autocomplete="off" [formGroup]="f" (ngSubmit)="login()">
+            <div class="ps-tabs">
+                <!--=====================================
+                    Login Form
+                    ======================================-->
+                <div class="ps-tab active" id="sign-in">
+                    <div class="ps-form__content">
+                        <picture>
+                            <img src="{{path}}img/template/favicon.png" width="75" class="mx-auto d-block img-fluid mb-4" alt="logo-chaskigo">
+                        </picture>
+                        <h3 class="text-center">Iniciar tu Cuenta</h3>
+                        <div class="input-group mb-3">
+                            <input class="form-control" type="email" placeholder="Correo Electrónico" formControlName="email" [ngClass]="{'is-invalid': invalidField('email')}">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">Please fill out this field correctly.</div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input class="form-control" type="password" placeholder="Contraseña" formControlName="password" [ngClass]="{'is-invalid': invalidField('password')}">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">Please fill out this field correctly.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="ps-checkbox">
+                                <input class="form-control" type="checkbox" id="remember-me" name="remember-me" [(ngModel)]="rememberMe">
+                                <label for="remember-me">Recuerdame</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group submtit">
+                            <button type="submit" class="ps-btn ps-btn--fullwidth">Iniciar Sesión</button>
+                        </div>
+                        <div class="link-danger">
+                            <a href="register">Registrarme con ChaskiGo?</a>
+                        </div>
+                        <div class="link">
+                            <a href="#resetPassword" data-toggle="modal">Olvide mi contraseña?</a>
+                        </div>
+
+                    </div>
+
+                    <div class="ps-form__footer">
+                        <p>Conectarme con:</p>
+                        <ul class="ps-list--social">
+                            <li><a class="facebook" style="cursor:pointer" (click)="facebookLogin()"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a class="google" style="cursor:pointer" (click)="googleLogin()"><i class="fab fa-google"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End Login Form -->
+            </div>
+        </form>
+    </div>
+</div>
+<!--=====================================
+Ventana modal para recuperar contraseña
+======================================-->
+<div class="modal" id="resetPassword">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Recuperar Contraseña</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form class="ps-form--account ps-tab-root needs-validation" novalidate>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Ingrese su correo electrónico" name="email" #emailPass email required>
+                        <div class="valid-feedback">Válido.</div>
+                        <div class="invalid-feedback">Por favor rellene este campo correctamente.</div>
+                    </div>
+                    <div class="form-group submtit">
+                        <button type="button" (click)="resetPassword(emailPass.value)" class="ps-btn ps-btn--fullwidth">Enviar</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=====================================
+Ventana modal para escribir nueva contraseña
+======================================-->
+<div class="modal" id="newPassword">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Reiniciar Contraseña</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form class="ps-form--account ps-tab-root needs-validation" novalidate>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Ingresa tu nueva contraseña" name="password" #password minlength="4" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" data-toggle="tooltip" title="Enter your password with at least 4 characters and must include uppercase, lowercase letters and numbers"
+                            (change)="validate()" required>
+                        <div class="valid-feedback">Válido.</div>
+                        <div class="invalid-feedback">Por favor rellene este campo correctamente.</div>
+                    </div>
+                    <div class="form-group submtit">
+                        <button type="button" (click)="newPassword(password.value)" class="ps-btn ps-btn--fullwidth">Enviar</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

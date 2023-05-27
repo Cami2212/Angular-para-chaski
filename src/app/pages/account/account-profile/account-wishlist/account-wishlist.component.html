@@ -1,0 +1,71 @@
+<!--=====================================
+Nav Account
+======================================-->
+<div class="ps-section__content">
+    <ul class="ps-section__links">
+        <li class="active"><a routerLink="/account">Mi Lista de Deseos</a></li>
+        <li><a routerLink="/account/my-shopping">Mis Pedidos</a></li>
+        <li *ngIf="!is_vendor"><a routerLink="/account/new-store">Nueva Tienda</a></li>
+        <li *ngIf="is_vendor"><a routerLink="/account/my-store">Mi Tienda</a></li>
+        <li *ngIf="is_vendor"><a href="account/my-sales">Mis Ventas</a></li>
+    </ul>
+    <!--=====================================
+  Wishlist
+  ======================================-->
+    <div class="table-responsive">
+        <table class="table ps-table--whishlist" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+                <tr>
+                    <th>Descripción Producto</th>
+                    <th>Precio Unitario</th>
+                    <th>Disponibilidad</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="products.length == 0">
+                    <td colspan="3" class="text-center">Todavía no tienes productos en tu lista de deseos!</td>
+                </tr>
+                <!-- Product -->
+                <tr *ngFor="let product of products; let i = index; let lastIndex = last">
+                    <td>
+                        <div class="ps-product--cart">
+                            <div class="ps-product__thumbnail">
+                                <a routerLink="/product/{{product.url}}">
+                                    <img src="{{path}}img/categories/{{product.category}}/{{product.image}}" alt="{{product.name}}">
+                                </a>
+                            </div>
+                            <div class="ps-product__content">
+                                <a routerLink="/product/{{product.url}}">
+                                {{product.name}}
+                              </a>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="ps-product">
+                        <div [innerHTML]="price[i][0]"></div>
+                    </td>
+                    <td>
+                        <span *ngIf="product.stock == 0" class="ps-tag ps-tag--out-stock">No Disponible</span>
+                        <span *ngIf="product.stock > 0" class="ps-tag ps-tag--in-stock">Disponible</span>
+                    </td>
+                    <td>
+                        <a *ngIf="product.stock > 0" class="ps-btn ps-btn--rounded p-3" style="cursor:pointer" (click)="addShoppingCart(product.url, 1, [])">
+                          Añadir al carrito
+                      </a>
+                    </td>
+                    <td>
+                        <a class="removeProduct" [attr.remove]="product.url" mwlConfirmationPopover [popoverMessage]="popoverMessage" placement="left" style="cursor:pointer" (confirm)="removeProduct(product.url)">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                    {{ lastIndex ? callback() : " "}}
+                </tr>
+            </tbody>
+        </table>
+        <h4 class="d-block d-lg-none text-right text-muted py-3">
+            Deslizar a la derecha <i class="fas fa-long-arrow-alt-right"></i>
+        </h4>
+    </div>
+</div>

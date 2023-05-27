@@ -1,0 +1,31 @@
+<!--=====================================
+Home Promotions
+======================================-->
+<div *ngIf="!preload" class="ps-promotions">
+    <div class="container">
+        <div class="row">
+            <div *ngFor="let banner of banner_promotions; let i = index" class="col-md-6 col-12 ">
+                <a class="ps-collection" routerLink="product/{{url[i]}}" aria-label="Promociones del Mes">
+                    <img width="570px" height="210px" loading="lazy" src="{{path}}img/categories/{{category[i]}}/default/{{banner}}" alt="" loading="lazy">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Home Promotions-->
+
+<!--=====================================
+Preload
+======================================-->
+<div *ngIf="preload" class="d-flex justify-content-center">
+    <div class="container">
+        <div class="ph-item border-0">
+            <div class="ph-col-6">
+                <div class="ph-picture"></div>
+            </div>
+            <div class="ph-col-6">
+                <div class="ph-picture"></div>
+            </div>
+        </div>
+    </div>
+</div>

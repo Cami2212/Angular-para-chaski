@@ -1,0 +1,162 @@
+<!--=====================================
+	Footer
+	======================================-->
+
+<footer class="ps-footer">
+
+    <div class="container">
+
+        <div class="ps-footer__widgets">
+
+            <!--=====================================
+				Contact us
+				======================================-->
+
+            <aside class="widget widget_footer widget_contact-us">
+
+                <h4 class="widget-title">Contactanos</h4>
+
+                <div class="widget_content">
+
+                    <p>Contactanos 24/7</p>
+                    <h3>+593 98 793 89 87 </h3>
+                    <p>Guayaquil, Ecuador <br>
+                        <a href="mailto:contact@marketplace.co">ventas@chaskigo.com</a>
+                    </p>
+
+                    <ul class="ps-list--social">
+                        <li>
+                            <a class="facebook" href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li>
+                            <a class="twitter" href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a class="youtube" href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                        </li>
+                        <li>
+                            <a class="instagram" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </aside>
+
+            <!--=====================================
+				Quick Links
+
+         <aside class="widget widget_footer">
+
+                <h4 class="widget-title">Quick links</h4>
+
+                <ul class="ps-list--link">
+
+                    <li><a href="#">Policy</a></li>
+
+                    <li><a href="#">Term &amp; Condition</a></li>
+
+                    <li><a href="#">Shipping</a></li>
+
+                    <li><a href="#">Return</a></li>
+
+                    <li><a href="faqs.html">FAQs</a></li>
+
+                </ul>
+
+            </aside>
+				======================================-->
+
+
+            <!--=====================================
+				Company
+
+        <aside class="widget widget_footer">
+
+                <h4 class="widget-title">Company</h4>
+
+                <ul class="ps-list--link">
+
+                    <li><a href="about-us.html">About Us</a></li>
+
+                    <li><a href="#">Affilate</a></li>
+
+                    <li><a href="#">Career</a></li>
+
+                    <li><a href="contact-us.html">Contact</a></li>
+
+                </ul>
+
+            </aside>
+				======================================-->
+
+
+
+            <!--=====================================
+				Bussiness
+				======================================-->
+
+            <aside class="widget widget_footer">
+
+                <h4 class="widget-title">Negocio</h4>
+
+                <ul class="ps-list--link">
+
+                    <li><a href="/checkout">Checkout</a></li>
+
+                    <li><a href="account">Mi Cuenta</a></li>
+
+                    <li><a href="/store-list">Nuestras Tiendas</a></li>
+
+                </ul>
+
+            </aside>
+
+        </div>
+
+        <!--=====================================
+			Categories Footer
+			======================================-->
+
+        <div class="ps-footer__links">
+            <p *ngFor="let category of categories; let lastIndex = last">
+                <strong [attr.category-footer]="category.name">{{category.name}}</strong> {{ lastIndex ? callback() : ""}}
+
+            </p>
+        </div>
+
+        <!--=====================================
+			CopyRight - Payment method Footer
+			======================================-->
+
+        <div class="ps-footer__copyright">
+
+            <p>© 2022 MarketPlace ChaskiGo. Todos los Derechos Reservados</p>
+
+            <p>
+                <span> Usamos PayPhone para:</span>
+                <a href="#" aria-label="payphone">
+                    <img loading="lazy" src="{{path}}/img/payment-method/payphone.svg" alt="">
+                </a>
+                <a href="#" aria-label="mastercard">
+                    <i class="fab fa-cc-mastercard"></i>
+                </a>
+                <a href="#" aria-label="visa">
+                    <i class="fab fa-cc-visa"></i>
+                </a>
+                <a href="#" aria-label="diners-club">
+                    <i class="fab fa-cc-diners-club"></i>
+                </a>
+                <a href="#" aria-label="paypal">
+                    <i class="fab fa-cc-paypal"></i>
+                </a>
+                <a href="#" aria-label="amex">
+                    <i class="fab fa-cc-amex"></i>
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>

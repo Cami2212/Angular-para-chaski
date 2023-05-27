@@ -1,0 +1,156 @@
+<!--=====================================
+    Header Mobile
+======================================-->
+<header class="header header--mobile" data-sticky="true">
+    <div class="header__top">
+        <div class="header__left">
+            <ul class="d-flex justify-content-center">
+
+                <li><a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f mr-4"></i></a></li>
+                <li><a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram mr-4"></i></a></li>
+                <li><a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter mr-4"></i></a></li>
+                <li><a href="#" target="_blank" aria-label="Youtube"><i class="fab fa-youtube mr-4"></i></a></li>
+            </ul>
+        </div>
+        <div class="header__right">
+            <ul class="navigation__extra">
+                <li><a href="/become-a-vendor">Vende En Chaskigo</a></li>
+                <li><a href="/store-list">Nuestras Marcas</a></li>
+                <li><i class="icon-telephone"></i> Contacto: :<strong> +593-98-793-8987</strong></li>
+                <li>
+                    <div class="ps-dropdown language">
+                        <a href="#"><img loading="lazy" src="{{path}}img/template/ecuador.png" alt="">Español</a>
+                        <ul class="ps-dropdown-menu">
+                            <li>
+                                <a href="#"><img loading="lazy" src="{{path}}img/template/en.png" alt="">English</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="navigation--mobile">
+        <div class="navigation__left">
+            <!--=====================================
+            Menu Mobile
+            ======================================-->
+            <div class="menu--product-categories">
+                <div class="ps-shop__filter-mb mt-4" id="filter-sidebar">
+                    <i class="icon-menu" style="font-size: xx-large;"></i>
+                </div>
+                <div class="ps-filter--sidebar">
+                    <div class="ps-filter__header">
+                        <h3>Categorias</h3>
+                        <a class="ps-btn--close ps-btn--no-boder" href="#" aria-label="Categoría Productos"></a>
+                    </div>
+                    <div class="ps-filter__content">
+                        <aside class="widget widget_shop">
+                            <ul class="ps-list--categories">
+                                <li *ngFor="let category of categories let lastIndex = last" class="current-menu-item menu-item-has-children">
+                                    <a href="products/{{category.url}}"><strong>{{category.name}}</strong></a>
+                                    <span class="sub-toggle">
+                                        <i class="fa fa-angle-down"></i>
+                                    </span>
+                                    <ul class="sub-menu" [attr.category]="category.name">
+                                    </ul>
+                                    {{ lastIndex ? callback() : "" }}
+                                </li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+            <!-- End menu
+            -->
+            <a class="ps-logo pl-3 pl-sm-0" routerLink="/">
+                <img src="{{path}}img/template/logo_chaskigo.png" style="width: 50%;" class="pt-4 center" alt="ChaskiGo">
+            </a>
+        </div>
+        <div class="navigation__right">
+            <div class="header__actions">
+                <!--=====================================
+						Cart
+						======================================-->
+                <div class="ps-cart--mini">
+                    <a class="header__extra" routerLink="/checkout">
+                        <i class="icon-bag2"></i><span><i>{{totalShoppingCart}}</i></span>
+                    </a>
+                    <div *ngIf="shoppingCart.length > 0" class="ps-cart__content">
+                        <div class="ps-cart__items">
+                            <div *ngFor="let product of shoppingCart; let lastShopping = last" class="ps-product--cart-mobile">
+                                <div class="ps-product__thumbnail">
+                                    <a routerLink="/product/{{product.url}}">
+                                        <img src="{{path}}img/categories/{{product.category}}/{{product.image}}">
+                                    </a>
+                                </div>
+                                <div class="ps-product__content">
+                                    <a class="ps-product__remove" style="cursor:pointer" (click)="removeProduct(product.url, product.listDetails)">
+                                        <i class="icon-cross"></i>
+                                    </a>
+                                    <a routerLink="/product/{{product.url}}">{{product.name}}</a>
+                                    <div [innerHTML]="product.details"></div>
+                                    <small class="ps-product text-left p-0 m-0">
+                                        Cantidad:
+                                        <span class="qShoppingHeaderM">{{product.quantity}}</span>
+                                        x Envio: $
+                                        <span class="sShoppingHeaderM">{{product.shipping}}</span>
+                                        +
+                                        <span class="pShoppingHeaderM" [innerHTML]="product.price"></span>
+                                                </small>
+                                </div>
+                                {{ lastShopping ? callbackShopping() : ""}}
+                            </div>
+
+                        </div>
+                        <div class="ps-cart__footer">
+                            <div [innerHTML]="subTotal"></div>
+                            <figure>
+                                <a class="ps-btn" routerLink="shopping-cart">Ver Mi Carrito</a>
+                                <a class="ps-btn" routerLink="checkout">Checkout</a>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <!--=====================================
+                Login and Register
+                ======================================-->
+                <div *ngIf="!authValidate" class="ps-block--user-header">
+                    <div class="ps-block__left">
+                        <i routerLink="/account" class="icon-user"></i>
+                    </div>
+                    <div class="ps-block__right">
+                        <a routerLink="login">Iniciar Mi Cuenta</a>
+                        <a routerLink="register">Registrarse</a>
+                    </div>
+                </div>
+                <!--=====================================
+						Go to Account
+						======================================-->
+                <div *ngIf="authValidate" class="ps-block--user-header">
+                    <div class="ps-block__left text-center">
+                        <a routerLink="account">
+                            <div [innerHTML]="picture" style="width:40px">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="ps-block__right">
+                        <a routerLink="account">Mi cuenta</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=====================================
+    Search
+    ======================================-->
+    <div class="ps-search--mobile">
+        <form class="ps-form--search-mobile">
+            <div class="form-group--nest">
+                <input (keyup.enter)="goSearch(search.value)" #search class="form-control" type="text" placeholder="Buscar En ChaskiGo...">
+                <button type="button" (click)="goSearch(search.value)" style="width: 90px;"><i>Buscar</i></button>
+            </div>
+        </form>
+    </div>
+</header>
+<!-- End Header Mobile -->

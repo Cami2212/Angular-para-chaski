@@ -1,0 +1,167 @@
+<!--=====================================
+Breadcrumb
+======================================-->
+<div class="ps-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a routerLink="/">Home</a></li>
+            <li><a href="shopping-cart">Carrito de Compras</a></li>
+            <li>Checkout</li>
+        </ul>
+    </div>
+</div>
+<!--=====================================
+Checkout
+======================================-->
+<div class="ps-checkout ps-section--shopping">
+    <div class="container">
+        <div class="ps-section__header">
+            <h1>Checkout</h1>
+        </div>
+        <div class="ps-section__content">
+            <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="ps-form--checkout">
+                <div class="row">
+                    <div class="col-xl-7 col-lg-8 col-sm-12">
+                        <div class="ps-form__billing-info">
+                            <h3 class="ps-form__heading">Detalles de Facturación</h3>
+
+                            <div class="form-group">
+                                <label>Nombres</label>
+                                <div class="form-group__content">
+                                    <input class="form-control" type="text" name="displayName" [(ngModel)]="user.displayName" readonly required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Correo Electrónico</label>
+                                <div class="form-group__content">
+                                    <input class="form-control" type="email" name="email" [(ngModel)]="user.email" email readonly required>
+                                </div>
+                            </div>
+                            <!--=====================================
+                            País
+                            ======================================-->
+                            <div class="form-group">
+                                <label>País<sup>*</sup></label>
+                                <div class="form-group__content">
+                                    <select class="form-control" name="country" [(ngModel)]="user.country" required (change)="onCountrySelected($event)" #country>
+                                      <option value="{{stCountry}}">{{stCountry}}</option>
+                                      <option *ngFor="let country of countries"
+                                    [value]="country.name" [ngValue]="">{{country.name}}</option>
+                                    </select>
+                                    <div *ngIf="f.submitted && f.controls['country'].errors" class="text-danger">Por favor rellene este campo.</div>
+                                </div>
+                            </div>
+
+                            <!--=====================================
+                            Provincia de la tienda
+                            ======================================-->
+                            <div class="form-group">
+                                <label>Provincia<sup>*</sup></label>
+                                <div class="form-group__content">
+                                    <select type="text" class="form-control" name="state" [(ngModel)]="user.state" (change)="onStateSelected(state)" #state required>
+                                      <option value="{{stState}}" >{{stState}}</option>
+                                        <option *ngFor="let state of states" [value]="state.name">{{state.name}}</option>
+                                    </select>
+                                    <div *ngIf="f.submitted && f.controls['state'].errors" class="text-danger">Por favor rellene este campo.</div>
+                                </div>
+                            </div>
+                            <!--=====================================
+                            Ciudad de la tienda
+                            ======================================-->
+                            <div class="form-group">
+                                <label>Ciudad<sup>*</sup></label>
+                                <div class="form-group__content">
+                                    <select type="text" class="form-control" name="city" [(ngModel)]="user.city" required #inputCity>
+                                      <option value="{{stCity}}" >{{stCity}}</option>
+                                        <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
+                                    </select>
+                                    <div *ngIf="f.submitted && f.controls['city'].errors" class="text-danger">Por favor rellene este campo.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Teléfono<sup>*</sup></label>
+                                <div class="form-group__content input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">{{flag}}{{dialCode}}</span>
+                                    </div>
+                                    <input class="form-control" type="text" name="phone" [(ngModel)]="user.phone" required #inputPhone>
+                                    <div *ngIf="f.submitted && f.controls['phone'].errors" class="text-danger">Por favor rellene este campo.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Dirección<sup>*</sup></label>
+                                <div class="form-group__content">
+                                    <input class="form-control" type="text" name="address" [(ngModel)]="user.address" required #inputAddress>
+                                    <div *ngIf="f.submitted && f.controls['address'].errors" class="text-danger">Por favor rellene este campo.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="ps-checkbox">
+                                    <input class="form-control" type="checkbox" id="create-account" name="saveAddress" [(ngModel)]="saveAddress" #inputSaveAddress (change)="saveAddressFnc(country, state, inputCity, inputPhone, inputAddress, inputSaveAddress)">
+                                    <label for="create-account">Guardar Dirección?</label>
+                                </div>
+                            </div>
+                            <h3 class="mt-40"> Información Adicional</h3>
+                            <div class="form-group">
+                                <label>Notas de Orden</label>
+                                <div class="form-group__content">
+                                    <textarea class="form-control" rows="7" placeholder="Notas sobre tu pedido, e.g. Notas especiales para la entrega." name="addInfo" [(ngModel)]="addInfo"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-4 col-sm-12">
+                        <div class="ps-form__total">
+                            <h2 class="ps-form__heading">Tu pedido</h2>
+                            <div class="content">
+                                <div class="ps-block--checkout-total">
+                                    <div class="ps-block__header d-flex justify-content-between">
+                                        <p>Producto(s)</p>
+                                        <p>SubTotal</p>
+                                    </div>
+                                    <div class="ps-block__content">
+                                        <table class="table ps-block__products">
+                                            <tbody>
+                                                <tr *ngFor="let product of shoppingCart; let lastIndex = last">
+                                                    <td>
+                                                        <a href="product/{{product.url}}"> {{product.name}}</a>
+                                                        <div [innerHTML]="product.details"></div>
+                                                        <div class="small text-secondary">Cantidad:
+                                                            <span class="qCheckout">{{product.quantity}}</span>
+                                                        </div>
+                                                        <div class="d-none sCheckout">{{product.shipping}}</div>
+                                                    </td>
+                                                    <td class="text-right ps-product">
+                                                        <div class="d-none pCheckout" [innerHTML]="product.price"></div>
+                                                        <div class="subTotalPriceCheckout">
+                                                            <div class="spinner-border"></div>
+                                                        </div>
+                                                    </td>
+                                                    {{ lastIndex ? callback() : ""}}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div [innerHTML]="subTotalP"></div>
+                                        <div [innerHTML]="taxP"></div>
+                                        <div [innerHTML]="totalP"></div>
+                                    </div>
+                                </div>
+                                <hr class="py-3">
+                                <h3 class="ps-form__heading">Seleccionar Método de Pago</h3>
+                                <div *ngIf="f.submitted && f.controls['paymentMethod'].errors" class="text-danger">Por favor selecciona un método de pago.</div>
+                                <div class="form-group">
+                                    <div class="ps-radio">
+                                        <input class="form-control" type="radio" id="payphone" name="paymentMethod" [(ngModel)]="paymentMethod" value="payphone" required>
+                                        <label for="payphone">Pagar con PayPhone?  <span><img src="{{path}}img/payment-method/payphone.png" class="w-25"></span></label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="ps-btn ps-btn--fullwidth">Proceder al Pago</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

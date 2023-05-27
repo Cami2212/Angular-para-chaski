@@ -1,0 +1,74 @@
+<!--=====================================
+    Breadcrumb
+    ======================================-->
+<div class="ps-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="/">Inicio</a></li>
+            <li>Registrarte</li>
+        </ul>
+    </div>
+</div>
+<!--=====================================
+  Login - Register Content
+  ======================================-->
+<div class="ps-my-account">
+    <div class="container">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="ps-form--account ps-tab-root needs-validation" novalidate>
+            <div class="ps-tabs">
+                <!--=====================================
+                  Formulario de Registro
+                  ======================================-->
+                <div class="ps-tab active" id="register">
+                    <div class="ps-form__content">
+                        <img src="{{path}}img/template/favicon.png" width="75" class="mx-auto d-block img-fluid" alt="logo-chaskigo">
+                        <h3 class="text-center">Registra tu Cuenta en Chaskigo</h3>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Nombres" [(ngModel)]="user.first_name" name="first_name" required (change)="capitalize(first_name)" #first_name>
+                            <div class="valid-feedback">Válido.</div>
+                            <div *ngIf="f.submitted && f.controls['first_name'].errors" class="invalid-feedback">Por favor rellene este campo.</div>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Apellido" [(ngModel)]="user.last_name" name="last_name" required (change)="capitalize(last_name)" #last_name>
+                            <div class="valid-feedback">Válido.</div>
+                            <div *ngIf="f.submitted && f.controls['last_name'].errors" class="invalid-feedback">Por favor rellene este campo.</div>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="email" placeholder="Email address" [(ngModel)]="user.email" name="email" email required (change)="validate(email)" #email>
+                            <div class="valid-feedback">Válido.</div>
+                            <div *ngIf="f.submitted && f.controls['email'].errors" class="invalid-feedback">Por favor rellene este campo.</div>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Username" [(ngModel)]="user.username" name="username" required minlength="2" maxlength="8" pattern="[A-Za-z]{2,8}" data-toggle="tooltip" title="Enter your username with at least 2 characters, maximum 8 characters without using numbers"
+                                (change)="validate(username)" #username>
+                            <div class="valid-feedback">Válido.</div>
+                            <div *ngIf="f.submitted && f.controls['username'].errors" class="invalid-feedback">Por favor rellene este campo.</div>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required minlength="4" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" data-toggle="tooltip" title="Su password debe contener al menos 4 caracteres e incluir caracteres especiales, letras mayusculas, minusculas y números"
+                                (change)="validate(password)" #password>
+                            <div class="valid-feedback">Válido.</div>
+                            <div *ngIf="f.submitted && f.controls['password'].errors" class="invalid-feedback">Por favor rellene este campo.</div>
+                        </div>
+
+                        <div class="form-group submtit">
+                            <button class="ps-btn ps-btn--fullwidth">Registarse</button>
+                        </div>
+                        <div class="link">
+                            <a href="login">Ya tengo una cuenta?</a>
+                        </div>
+
+                    </div>
+                    <div class="ps-form__footer">
+                        <p>Connect with:</p>
+                        <ul class="ps-list--social">
+                            <li><a class="facebook" style="cursor:pointer" (click)="facebookRegister()"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a class="google" style="cursor:pointer" (click)="googleRegister()"><i class="fab fa-google"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End Register Form -->
+            </div>
+        </form>
+    </div>
+</div>

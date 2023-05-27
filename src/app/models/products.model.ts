@@ -1,0 +1,32 @@
+export class ProductsModel{
+  id:any
+	category:any;
+	date_created:any;
+	default_banner:any;
+	delivery_time!:number;
+	description:any;
+	details:any;
+	feedback:any;
+	gallery:any;
+	horizontal_slider:any;
+	image:any;
+	name:any;
+	offer:any;
+	price:any;
+	reviews:any;
+	sales!:number;
+	shipping:any;
+	specification:any;
+	stock:number|any;
+	store:any;
+	sub_category:any;
+	summary:any;
+	tags:any;
+	title_list:any;
+	top_banner:any;
+	url:any;
+	vertical_slider:any;
+	video:any;
+	views!:number;
+
+}

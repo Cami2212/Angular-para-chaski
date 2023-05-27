@@ -1,0 +1,76 @@
+<!--=====================================
+Top Categoríes
+======================================-->
+
+<div *ngIf="!preload" class="ps-top-categories">
+
+    <div class="container">
+
+        <h2 style="margin-top: 20px;">Top Categorias del Mes</h2>
+
+        <div class="row">
+
+            <div *ngFor="let category of categories" class="col-xl-2 col-lg-3 col-sm-4 col-6 ">
+                <div class="ps-block--category">
+                    <a class="ps-block__overlay" routerLink="products/{{category.url}}" aria-label="Nuestros Productos"></a>
+                    <img loading="lazy" src="{{path}}img/categories/{{category.url}}/{{category.image}}" alt="" loading="lazy">
+                    <p>{{category.name}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- End Top Categories -->
+
+<!--===================================== Preload ======================================-->
+<div *ngIf="preload" class="d-lg-flex justify-content-center d-none">
+    <div class="container">
+        <div class="ph-item border-0">
+
+            <div class="ph-col-2">
+                <div class="ph-row">
+                    <div class="ph-picture" style="height: 200px; margin: auto;">
+                    </div>
+                </div>
+            </div>
+            <div class="ph-col-2">
+                <div class="ph-row">
+                    <div class="ph-picture" style="height: 200px; margin: auto;">
+                    </div>
+                </div>
+            </div>
+            <div class="ph-col-2">
+                <div class="ph-row">
+                    <div class="ph-picture" style="height: 200px; margin: auto;">
+                    </div>
+                </div>
+            </div>
+            <div class="ph-col-2">
+                <div class="ph-row">
+                    <div class="ph-picture" style="height: 200px; margin: auto;">
+                    </div>
+                </div>
+            </div>
+            <div class="ph-col-2">
+                <div class="ph-row">
+                    <div class="ph-picture" style="height: 200px; margin: auto;">
+                    </div>
+                </div>
+            </div>
+            <div class="ph-col-2">
+                <div class="ph-row">
+                    <div class="ph-picture" style="height: 200px; margin: auto;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<div *ngIf="preload" class="d-flex justify-content-center d-lg-none">
+    <div class="spinner-border text-muted my-5"></div>
+</div>

@@ -1,0 +1,204 @@
+<!--=====================================
+	Header
+	======================================-->
+<header class="header header--standard header--market-place-4" data-sticky="true">
+    <!--=====================================
+		Header TOP
+		======================================-->
+    <div class="header__top">
+        <div class="container">
+
+            <!--=====================================
+				Redes Sociales
+				======================================-->
+            <div class="header__left">
+
+            </div>
+            <!--=====================================
+				Contact & language
+				======================================-->
+            <div class="header__right">
+
+                <ul class="header__top-links">
+                    <li><a routerLink="/become-a-vendor">Vende en Chaskigo</a></li>
+                    <li><a href="/store-list">Nuestras Marcas</a></li>
+                    <li><i class="icon-telephone"></i> Contacto:<strong> 593-98-793-8987</strong></li>
+                    <li>
+                        <div class="ps-dropdown language">
+                            <a href="#"><img loading="lazy" src="{{path}}img/template/ec.png" alt=""> Español</a>
+                            <ul class="ps-dropdown-menu">
+                                <li>
+                                    <a href="#"><img loading="lazy" src="{{path}}img/template/en.png" alt="">English</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- End Container -->
+    </div>
+    <!-- Header Top -->
+    <!--=====================================
+		Header Content
+		======================================-->
+    <div class="header__content">
+
+        <div class="container">
+            <div class="header__content-left">
+                <!--=====================================
+					Logo
+					======================================-->
+                <a class="ps-logo" routerLink="/" aria-label="Logo ChaskiGo">
+                    <img src="{{path}}/img/template/logo_chaskigo.png" alt="">
+                </a>
+                <!--=====================================
+					Menú
+					======================================-->
+                <div class="menu--product-categories">
+                    <div class="menu__toggle">
+                        <i class="icon-menu"></i>
+                        <span> Tienda por Categorias</span>
+                    </div>
+                    <div class="menu__content">
+                        <ul class="menu--dropdown">
+                            <li *ngFor="let category of categories; let i = index; let lastIndex = last" class="menu-item-has-children has-mega-menu">
+                                <a routerLink="/products/{{category.url}}" target="_top"><i class="lnr lnr-chevron-right"></i>{{category.name}}</a>
+                                <div class="mega-menu">
+                                    <div *ngFor="let title of titleLists[i]" class="mega-menu__column">
+                                        <h4>{{title}}<span class="sub-toggle"></span></h4>
+                                        <ul class="mega-menu__list" [attr.titleList]="title">
+                                        </ul>
+                                    </div>
+                                </div>
+                                {{lastIndex ? callback():""}}
+                            </li>
+                            <li class="menu-item-has-children has-mega-menu"><a href=""><i class="lnr lnr-chevron-right"></i>Servicios</a><span class="sub-toggle"></span>
+                                <div class="mega-menu">
+                                    <div class="mega-menu__column">
+                                        <h4>Nosotros<span class="sub-toggle"></span></h4>
+                                        <ul class="mega-menu__list">
+                                            <li><a href="about-us.html">Acerca de Nosotros</a>
+                                            </li>
+                                            <li><a href="contact-us.html">Contactanos</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu__column">
+                                        <h4>Link de Ayuda<span class="sub-toggle"></span></h4>
+                                        <ul class="mega-menu__list">
+                                            <li><a href="https://consultaweb.ant.gob.ec/PortalWEB/paginas/clientes/clp_criterio_consulta.jsp">Multas de Transito</a>
+                                            </li>
+                                            <li><a href="https://app.iess.gob.ec/iess-gestion-agendamiento-citas-medicas-web/login/login.jsf">Citas Médicas</a>
+                                            </li>
+                                            <li><a href="vendor-dashboard-free.html">SRI</a>
+                                            </li>
+                                            <li><a href="vendor-dashboard-pro.html">Noticias Transporte</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- End menu-->
+            </div>
+            <!-- End Header Content Left-->
+            <!--=====================================
+				Search
+				======================================-->
+            <div class="header__content-center">
+                <form class="ps-form--quick-search">
+                    <input (keyup.enter)="goSearch(search.value)" #search class="form-control border rounded" type="text" placeholder="Buscar Producto o Servicio...">
+                    <button class="border border-white" type="button" (click)="goSearch(search.value)">Buscar</button>
+                </form>
+            </div>
+            <div class="header__content-right">
+                <div class="header__actions">
+                    <!--=====================================
+						Wishlist
+						======================================-->
+                    <a class="header__extra" routerLink="/account">
+                        <i class="icon-heart"></i><span><i class="totalWishlist">{{wishlist}}</i></span>
+                    </a>
+                    <!--=====================================
+						Cart
+						======================================-->
+                    <div class="ps-cart--mini">
+                        <a class="header__extra" routerLink="/checkout">
+                            <i class="icon-bag2"></i><span><i>{{totalShoppingCart}}</i></span>
+                        </a>
+                        <div *ngIf="shoppingCart.length > 0" class="ps-cart__content">
+                            <div class="ps-cart__items">
+                                <div *ngFor="let product of shoppingCart; let lastShopping = last" class="ps-product--cart-mobile">
+                                    <div class="ps-product__thumbnail">
+                                        <a routerLink="/product/{{product.url}}">
+                                            <img src="{{path}}img/categories/{{product.category}}/{{product.image}}" loading="lazy">
+                                        </a>
+                                    </div>
+                                    <div class="ps-product__content">
+                                        <a class="ps-product__remove" style="cursor:pointer" (click)="removeProduct(product.url, product.listDetails)">
+                                            <i class="icon-cross"></i>
+                                        </a>
+                                        <a routerLink="/product/{{product.url}}">{{product.name}}</a>
+                                        <div [innerHTML]="product.details"></div>
+                                        <small class="ps-product text-left p-0 m-0">
+                                                Cantidad:
+                                                <span class="qShoppingHeader">{{product.quantity}}</span>
+                                                x Envio: $
+                                                <span class="sShoppingHeader">{{product.shipping}}</span>
+                                                +
+                                                <span class="pShoppingHeader" [innerHTML]="product.price"></span>
+                                            </small>
+                                    </div>
+                                    {{ lastShopping ? callbackShopping() : ""}}
+                                </div>
+
+                            </div>
+                            <div class="ps-cart__footer">
+                                <div [innerHTML]="subTotal"></div>
+                                <figure>
+                                    <a class="ps-btn" routerLink="/shopping-cart">Ver Mi Carrito</a>
+                                    <a class="ps-btn" routerLink="/checkout">Checkout</a>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <!--=====================================
+						Login and Register
+						======================================-->
+                    <div *ngIf="!authValidate" class="ps-block--user-header">
+                        <div class="ps-block__left">
+                            <i class="icon-user"></i>
+                        </div>
+                        <div class="ps-block__right">
+                            <a routerLink="login">Iniciar Mi Cuenta</a>
+                            <a routerLink="register">Registarse</a>
+                        </div>
+                    </div>
+                    <!--=====================================
+						Go to Account
+						======================================-->
+                    <div *ngIf="authValidate" class="ps-block--user-header">
+                        <div class="ps-block__left text-center">
+                            <a routerLink="account">
+                                <div [innerHTML]="picture" style="width:40px">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="ps-block__right">
+                            <a>Hola, {{displayName}}</a>
+                            <a routerLink="account">Mi cuenta</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Header Actions-->
+            </div>
+            <!-- End Header Content Right-->
+        </div>
+        <!-- End Container-->
+    </div>
+    <!-- End Header Content-->
+</header>

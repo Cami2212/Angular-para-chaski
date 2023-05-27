@@ -1,0 +1,60 @@
+<!--=====================================
+	Header Promotion
+	======================================-->
+
+<div *ngIf="!preload && top_banner !=null" class="ps-block--promotion-header bg--cover" style="background: url({{path}}img/categories/{{category}}/top/{{top_banner['IMG tag']}})">
+    <div class="container">
+        <div class="ps-block__left">
+            <h3>{{top_banner['H3 tag']}}</h3>
+            <figure>
+                <p>{{top_banner['P1 tag']}}</p>
+                <h4>{{top_banner['H4 tag']}}</h4>
+            </figure>
+        </div>
+        <div class="ps-block__center">
+            <p>{{top_banner['P2 tag']}}<span>{{top_banner['Span tag']}}</span>
+            </p>
+        </div>
+        <a class="ps-btn ps-btn--sm" routerLink="product/{{url}}">{{top_banner['Button tag']}}</a>
+    </div>
+</div>
+<!--=====================================
+	Preload
+	======================================-->
+<div *ngIf="preload && top_banner == null" class="d-lg-flex justify-content-center d-none">
+    <div class="container">
+        <div class="ph-item border-0">
+            <div class="ph-col-2">
+                <div class="ph-row">
+                    <div class="ph-col-4  big"></div>
+                </div>
+            </div>
+            <div class="ph-col-4">
+                <div class="ph-row">
+                    <div class="ph-col-2  big"></div>
+                    <div class="ph-col-2  empty"></div>
+                    <div class="ph-col-10 "></div>
+                </div>
+            </div>
+            <div class="ph-col-4">
+                <div class="ph-row">
+                    <div class="ph-picture" style="height: 40px;"></div>
+                </div>
+            </div>
+            <div class="ph-col-2">
+                <div class="ph-row">
+                    <div class="ph-col-4  empty"></div>
+
+                    <div class="ph-col-4  big" style="height: 30px;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div *ngIf="preload" class="d-flex justify-content-center d-lg-none">
+
+    <div class="spinner-border text-muted my-5"></div>
+
+</div>
